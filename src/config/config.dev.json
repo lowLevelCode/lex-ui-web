@@ -1,0 +1,73 @@
+{
+  "region": "us-east-1",
+  "cognito": {
+    "poolId": "us-east-1:90d4cc12-175c-495d-887c-de4df9e6717a",
+    "appUserPoolClientId": "1kavkumdt5n9dke0q0avrij7qp",
+    "appUserPoolName": "us-east-1_pGc4oBpML",
+    "appDomainName": "lexkwebkuikprofuturokidentitypoolconfigkbcn720090921057.auth.us-east-1.amazoncognito.com",
+    "aws_cognito_region": "us-east-1",
+    "region": "us-east-1"
+  },
+  "connect": {
+    "contactFlowId": "",
+    "instanceId": "",
+    "apiGatewayEndpoint": "",
+    "promptForNameMessage": "Before starting a live chat, please tell me your name?",
+    "waitingForAgentMessage": "Thanks for waiting. An agent will be with you when available.",
+    "waitingForAgentMessageIntervalSeconds": "60",
+    "agentJoinedMessage": "{Agent} has joined.",
+    "agentLeftMessage": "{Agent} has left.",
+    "chatEndedMessage": "Chat ended.",
+    "attachChatTranscript": "true",
+    "liveChatTerms": "live chat"
+  },
+  "lex": {
+    "v2BotId": "",
+    "v2BotAliasId": "",
+    "v2BotLocaleId": "en_US",
+    "botName": "Profuturo",
+    "botAlias": "BETA",
+    "initialText": "Bienvenidos, soy Alex bot",
+    "initialSpeechInstruction": "Say 'Buy Flowers' to get started.",
+    "initialUtterance": "",
+    "reInitSessionAttributesOnRestart": false,
+    "region": "us-east-1",
+    "retryOnLexPostTextTimeout": "false",
+    "retryCountPostTextTimeout": "1"    
+  },
+  "ui": {
+    "parentOrigin": "https://d3pnvo3qah0eg5.cloudfront.net/",
+    "toolbarTitle": "Alex",
+    "textInputPlaceholder":"Escribe aqui o usa el microfono",
+    "toolbarLogo": "",
+    "positiveFeedbackIntent": "Thumbs up",
+    "negativeFeedbackIntent": "Thumbs down",
+    "helpIntent": "Help",
+    "enableLogin": false,
+    "enableLiveChat": false,
+    "forceLogin": false,
+    "AllowSuperDangerousHTMLInMessage": true,
+    "shouldDisplayResponseCardTitle": false,
+    "saveHistory": false,
+    "enableSFX": false,
+    "minButtonContent": "",
+    "hideInputFieldsForButtonResponse": false,
+    "pushInitialTextOnRestart": false,
+    "directFocusToBotInput": false,
+    "showDialogStateIcon": false,
+    "backButton": false,
+    "messageMenu": true,
+    "hideButtonMessageBubble": false
+  },
+  "polly": {
+    "voiceId": "Salli"
+  },
+  "recorder": {
+    "preset": "speech_recognition"
+  },
+  "iframe": {
+    "iframeOrigin": "https://d3pnvo3qah0eg5.cloudfront.net/",
+    "shouldLoadIframeMinimized": false,
+    "iframeSrcPath": "/index.html#/?lexWebUiEmbed=true"
+  }
+}
