@@ -206,7 +206,7 @@ const configDefault = {
     // https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg
     agentAvatarImageUrl: '',
 
-    // Show the diaglog state icon, check or alert, in the text bubble
+    // Show the diaglog state icon, check or alert, in the text bubble 
     showDialogStateIcon: true,
 
     // Hide the message bubble on a response card button press

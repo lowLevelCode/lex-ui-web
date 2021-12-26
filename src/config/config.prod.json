@@ -47,7 +47,7 @@
     "enableLiveChat": false,
     "forceLogin": false,
     "AllowSuperDangerousHTMLInMessage": true,
-    "shouldDisplayResponseCardTitle": false,
+    "shouldDisplayResponseCardTitle": false, 
     "saveHistory": false,
     "enableSFX": false,
     "minButtonContent": "",

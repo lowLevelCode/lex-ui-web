@@ -48,7 +48,7 @@
     "forceLogin": false,
     "AllowSuperDangerousHTMLInMessage": true,
     "shouldDisplayResponseCardTitle": false,
-    "saveHistory": false,
+    "saveHistory": false, 
     "enableSFX": false,
     "minButtonContent": "",
     "hideInputFieldsForButtonResponse": false,
