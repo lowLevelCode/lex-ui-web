@@ -1,138 +1,64 @@
 <template>
-  <v-flex d-flex class="message">
-    <!-- contains message and response card -->
-    <v-layout column ma-2 class="message-layout">
-
-      <!-- contains message bubble and date -->
-      <v-flex d-flex class="message-bubble-date-container">
-        <v-layout column class="message-bubble-column">
-
-          <!-- contains message bubble and avatar -->
-          <v-flex d-flex class="message-bubble-avatar-container">
-            <v-layout row class="message-bubble-row">
-              <div
+  <div class="the-container">
+    <div :class="message.type === 'human' ? 'message-container-human' : 'message-container-bot' ">
+          <div
                 v-if="shouldShowAvatarImage"
                 v-bind:style="avatarBackground"
                 tabindex="-1"
                 class="avatar"
                 aria-hidden="true"
               >
-              </div>
+          </div>
               <div
                 tabindex="0"
                 v-on:focus="onMessageFocus"
                 v-on:blur="onMessageBlur"
                 class="message-bubble focusable"
-              >
+              >              
+              <div>                
                 <message-text
                   v-bind:message="message"
                   v-if="'text' in message && message.text !== null && message.text.length"
                 ></message-text>
-                <div
-                  v-if="message.id === this.$store.state.messages.length - 1 && isLastMessageFeedback && message.type === 'bot' && botDialogState && showDialogFeedback"
-                  class="feedback-state"
-                >
-                  <v-icon
-                    v-on:click="onButtonClick(positiveIntent)"
-                    v-bind:class="{'feedback-icons-positive': !positiveClick, 'positiveClick': positiveClick}"
-                    tabindex="0"
-                  >
-                    thumb_up
-                  </v-icon>
-                  <v-icon
-                    v-on:click="onButtonClick(negativeIntent)"
-                    v-bind:class="{'feedback-icons-negative': !negativeClick, 'negativeClick': negativeClick}"
-                    tabindex="0"
-                  >
-                    thumb_down
-                  </v-icon>
-                </div>
-                <v-icon
-                  medium
-                  v-if="message.type === 'bot' && botDialogState && showDialogStateIcon"
-                  v-bind:class="`dialog-state-${botDialogState.state}`"
-                  class="dialog-state"
-                >
-                  {{botDialogState.icon}}
-                </v-icon>
-                <div v-if="message.type === 'human' && message.audio">
-                    <audio>
-                      <source v-bind:src="message.audio" type="audio/wav">
-                    </audio>
-                    <v-btn
-                    v-on:click="playAudio"
-                    tabindex="0"
-                    icon
-                    v-show="!showMessageMenu"
-                    class="icon-color ml-0 mr-0"
-                  >
-                    <v-icon class="play-icon">play_circle_outline</v-icon>
-                  </v-btn>
-                </div>
-                 <v-menu offset-y v-if="message.type === 'human'" v-show="showMessageMenu">
-                  <v-btn
-                    slot="activator"
-                    icon
-                  >
-                    <v-icon class="smicon">
-                      more_vert
-                    </v-icon>
-                  </v-btn>
-                  <v-list>
-                    <v-list-tile>
-                      <v-list-tile-title v-on:click="resendMessage(message.text)">
-                          <v-icon>replay</v-icon>
-                      </v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile
-                      v-if="message.type === 'human' && message.audio"
-                      class="message-audio">
-                      <v-list-tile-title v-on:click="playAudio">
-                            <v-icon>play_circle_outline</v-icon>
-                      </v-list-tile-title>
-                    </v-list-tile>
-                  </v-list>
-                </v-menu>
-              </div>
-            </v-layout>
-          </v-flex>
-          <v-flex
-            v-if="shouldShowMessageDate && isMessageFocused"
-            class="text-xs-center message-date"
-            aria-hidden="true"
-          >
-           {{messageHumanDate}}
-          </v-flex>
-        </v-layout>
-      </v-flex>
-      <v-flex
-        v-if="shouldDisplayResponseCard"
-        class="response-card"
-        d-flex
-        mt-2 mr-2 ml-3
-      >
 
-        <div class="carousel-container">
-          <v-carousel height="auto" width="auto">
-          <v-carousel-item
-          v-for="(card, index) in message.responseCard.genericAttachments"
-          :key="index"
-          
-          reverse-transition="fade"
-          transition="fade"
-          >
-            <response-card
-            class="response-card"
-            v-bind:response-card="card"            
-            >
-            </response-card>
-          </v-carousel-item>
-        </v-carousel>
-        </div>
+                <div v-if="message.responseCard.genericAttachments.length == 1">
+                  <response-card
+                    v-for="(card, index) in message.responseCard.genericAttachments"
+                    :key="index"
+                    class="response-card"
+                    v-bind:response-card="card"            
+                    >
+                  </response-card>
+                </div>
+              </div>      
+          </div>
+    </div>
+    
+      <v-flex
+      v-if="shouldDisplayResponseCard"
+      class="response-card"
+      d-flex
+      mt-2 mr-2 ml-3
+    >      
+      <div class="carousel-container" v-if="message.responseCard.genericAttachments.length > 1">
+        <v-carousel hide-delimiters :interval="10000" class="carousel-content">
+        <v-carousel-item
+        v-for="(card, index) in message.responseCard.genericAttachments"
+        :key="index"
         
-      </v-flex>
-    </v-layout>
-  </v-flex>
+        reverse-transition="fade"
+        transition="fade"
+        >
+          <response-card
+          class="response-card"
+          v-bind:response-card="card"            
+          >
+          </response-card>
+        </v-carousel-item>
+      </v-carousel>
+      </div>          
+    </v-flex>    
+  </div>
 </template>
 
 <script>
@@ -441,9 +367,27 @@ export default {
 }
 
 .carousel-container {
-  width:50%;
+  width:100%;
+  padding:12px;  
 }
 .response-card {
   width:98%;
+}
+
+.message-container-bot {
+  display:flex;  
+  width:100%;
+  padding:12px;
+}
+
+.message-container-human {
+  display:flex;  
+  flex-direction:row-reverse;
+  width:100%;
+  padding-right:12px;  
+}
+
+.the-container {
+  width:100%;
 }
 </style>

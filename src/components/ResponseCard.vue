@@ -1,10 +1,6 @@
 <template>
-  <v-card>
-    <div v-if=shouldDisplayResponseCardTitle>
-      <v-card-title v-if="responseCard.title && responseCard.title.trim()" primary-title class="red lighten-5">
-        <span class="headline">{{responseCard.title}}</span>
-      </v-card-title>
-    </div>
+  <v-card class="card-container">
+    
     <v-card-text v-if="responseCard.subTitle">
       <span>{{responseCard.subTitle}}</span>
     </v-card-text>
@@ -12,10 +8,11 @@
       v-if="responseCard.imageUrl"
       v-bind:src="responseCard.imageUrl"
       contain
-      height="33vh"
+      height="50vh"
     ></v-card-media>
     <v-card-actions v-if="responseCard.buttons" class="button-row">
-      <v-btn
+      <div class="btns-containers">
+        <v-btn
         v-for="(button) in responseCard.buttons"
         v-show="button.text && button.value"
         v-bind:key="button.id"
@@ -24,10 +21,11 @@
         round
         default
         v-bind:color="button.text.toLowerCase() === 'more' ? '' : 'accent'"
-        class="secondary--text"
+        class="secondary--text btns"
       >
         {{button.text}}
       </v-btn>
+      </div>
     </v-card-actions>
     <v-card-actions v-if="responseCard.attachmentLinkUrl">
       <v-btn
@@ -99,16 +97,13 @@ export default {
   box-shadow: none !important;
   background-color: unset !important;
 }
+
 .card__title {
   padding: 0.5em;
   padding-top: 0.75em;
 }
 .card__text {
   padding: 0.33em;
-}
-
-.button-row {
-  display: inline-block;
 }
 
 .card__actions .btn {
@@ -121,4 +116,15 @@ export default {
   justify-content: center;
   padding-bottom: 0.15em;
 }
+
+.btns-containers {
+  display:flex;
+  flex-direction:column;
+}
+
+.btns {
+  background-color:red;
+  color:white;
+}
+
 </style>
