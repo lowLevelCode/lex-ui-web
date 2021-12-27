@@ -19,7 +19,7 @@
           v-bind:disabled="shouldDisableClickedResponseCardButtons"
           round
           default
-          class="btns">
+          :class="isCarousel ? 'btn-isCarousel' : 'btns'">
           {{button.text}}
         </button>
       </div>
@@ -120,7 +120,7 @@ export default {
   width:100%;
 }
 
-.btns {  
+.btn-isCarousel {  
   align-items: center;
   border: 1px solid #e6e5eb;
   border-radius: 20px;
@@ -136,8 +136,24 @@ export default {
   margin-bottom: 5px;
 }
 
-.btns:hover {
+.btn-isCarousel:hover {
   background: #eaeaea;
   color: #277adc;
 }    
+
+
+.btns {
+  background-color: #0099FF;
+  color:white;
+  border-radius:15px;
+  margin-bottom:5px;
+  padding:5px;
+}
+
+
+.btns:hover {
+  background-color: #005C99;
+  color:white;
+}
+
 </style>

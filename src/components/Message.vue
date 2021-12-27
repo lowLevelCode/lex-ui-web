@@ -53,7 +53,7 @@
             -->. 
             </v-carousel-item>
           </v-carousel>
-
+          <br/>
           <response-card
               v-if="currentCardData"
               class="response-card"
@@ -161,8 +161,7 @@ export default {
         this.message.responseCard.genericAttachments instanceof Array
       );
     },
-    shouldShowAvatarImage() {
-      console.log(this.message.type);
+    shouldShowAvatarImage() {      
       if (this.message.type === 'bot') {
         return this.botAvatarUrl;
       } else if (this.message.type === 'human') {
