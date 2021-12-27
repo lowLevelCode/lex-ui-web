@@ -34,30 +34,35 @@
           </div>
     </div>
     
-      <v-flex
-      v-if="shouldDisplayResponseCard"
-      class="response-card"
-      d-flex
-      mt-2 mr-2 ml-3
-    >      
-      <div class="carousel-container" v-if="message.responseCard.genericAttachments.length > 1">
-        <v-carousel hide-delimiters :interval="100000" class="carousel-content">
-        <v-carousel-item
-        v-for="(card, index) in message.responseCard.genericAttachments"
-        :key="index"
-        
-        reverse-transition="fade"
-        transition="fade"
-        >
+      <div class="carousel-container">
+        <div class="carousel-content" v-if="message.responseCard && message.responseCard.genericAttachments.length > 1">
+          <v-carousel hide-delimiters :interval="100000" v-model="cardDataIndex">
+            <v-carousel-item
+            v-for="(card, index) in message.responseCard.genericAttachments"
+            :key="index"
+            :src="card.imageUrl"
+            reverse-transition="fade"
+            transition="fade"
+            >
+            <!--
+              <response-card
+              class="response-card"
+              v-bind:response-card="card"            
+              >
+              </response-card>
+            -->. 
+            </v-carousel-item>
+          </v-carousel>
+
           <response-card
-          class="response-card"
-          v-bind:response-card="card"            
-          >
-          </response-card>
-        </v-carousel-item>
-      </v-carousel>
-      </div>          
-    </v-flex>    
+              v-if="currentCardData"
+              class="response-card"
+              v-bind:response-card="currentCardData"
+              v-bind:is-carousel="true"
+              >
+          </response-card>        
+        </div>
+      </div>
   </div>
 </template>
 
@@ -74,6 +79,7 @@ export default {
   },
   data() {
     return {
+      cardDataIndex:0,
       isMessageFocused: false,
       messageHumanDate: 'Now',
       positiveClick: false,
@@ -99,6 +105,10 @@ export default {
     };
   },
   computed: {
+    currentCardData() {
+      if(this.message.responseCard)
+        return this.message.responseCard.genericAttachments[this.cardDataIndex];
+    },
     botDialogState() {
       if (!('dialogState' in this.message)) {
         return null;
@@ -152,9 +162,10 @@ export default {
       );
     },
     shouldShowAvatarImage() {
+      console.log(this.message.type);
       if (this.message.type === 'bot') {
         return this.botAvatarUrl;
-      } else if (this.message.type === 'agent') {
+      } else if (this.message.type === 'human') {
         return this.agentAvatarUrl;
       }
       return false;
@@ -292,18 +303,20 @@ export default {
 }
 
 .message-bot .message-bubble {
-  background-color: #FFEBEE; /* red-50 from material palette */
+  background-color: #E5F1FF; /* red-50 from material palette */
 }
 
 .message-agent .message-bubble {
-  background-color: #FFEBEE; /* red-50 from material palette */
+  background-color: #E5F1FF; /* red-50 from material palette */
 }
 .message-human .message-bubble {
-  background-color: #E8EAF6; /* indigo-50 from material palette */
+  background-color: #0099FF; /* indigo-50 from material palette */  
+  color:white;
 }
 
 .message-feedback .message-bubble {
-  background-color: #E8EAF6;
+  background-color: #0099FF;  
+  color:white;
 }
 
 .dialog-state {
@@ -366,10 +379,27 @@ export default {
   pointer-events: none;
 }
 
-.carousel-container {
-  width:100%;
-  padding:12px;  
+.carousel-content {
+  width:100%;  
+  padding:12px;
+  border:1px solid #ccc;  
+  border-radius:8px;
 }
+
+.carousel-container {
+  padding:8px;
+}
+
+.carousel {
+  height: 200px !important;
+  border-radius:20px;  
+}
+
+.v-carousel__next > button,
+.v-carousel__prev > button {
+ color: red !important; 
+}
+
 .response-card {
   width:98%;
 }

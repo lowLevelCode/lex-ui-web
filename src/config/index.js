@@ -88,8 +88,7 @@ const configDefault = {
     botAlias: '$LATEST',
 
     // instruction message shown in the UI
-    initialText: 'You can ask me for help ordering flowers. ' +
-      'Just type "order flowers" or click on the mic and say it.',
+    initialText: 'hola',
 
     // instructions spoken when mic is clicked
     initialSpeechInstruction: 'Say "Order Flowers" to get started',
@@ -142,7 +141,7 @@ const configDefault = {
 
   ui: {
     // this dynamicall changes the pageTitle injected at build time
-    pageTitle: 'Order Flowers Bot',
+    pageTitle: 'Profuturo',
 
     // when running as an embedded iframe, this will be used as the
     // be the parent origin used to send/receive messages
@@ -199,12 +198,12 @@ const configDefault = {
     showMessageDate: true,
 
     // bot avatar image URL
-    // https://st3.depositphotos.com/8950810/17657/v/600/depositphotos_176577870-stock-illustration-cute-smiling-funny-robot-chat.jpg
-    avatarImageUrl: 'https://st3.depositphotos.com/8950810/17657/v/600/depositphotos_176577870-stock-illustration-cute-smiling-funny-robot-chat.jpg',
+    // https://st3.depositphotos.com/8950810/17657/v/600/depositphotos_176577870-stock-illustration-cute-smiling-funny-robot-chat.jpg    
+    avatarImageUrl: require('@/assets/img/alba.jpg'),
 
     // agent avatar image URL ( if live Chat is enabled)
     // https://i.pinimg.com/280x280_RS/2e/45/66/2e4566fd829bcf9eb11ccdb5f252b02f.jpg
-    agentAvatarImageUrl: '',
+    agentAvatarImageUrl: require('@/assets/img/user.jpg'),
 
     // Show the diaglog state icon, check or alert, in the text bubble 
     showDialogStateIcon: true,

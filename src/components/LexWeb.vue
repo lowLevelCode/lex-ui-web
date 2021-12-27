@@ -2,11 +2,15 @@
   <v-app id="lex-web"
     v-bind:ui-minimized="isUiMinimized"
   >
+
+    <img src="@/assets/img/content.jpeg" height="100%"/>
+    <!--
     <min-button
       v-bind:toolbar-color="toolbarColor"
       v-bind:is-ui-minimized="isUiMinimized"
       v-on:toggleMinimizeUi="toggleMinimizeUi"
     ></min-button>
+    
     <toolbar-container
       v-if="!isUiMinimized"
       v-bind:userName="userNameValue"
@@ -21,22 +25,40 @@
       @endLiveChat="handleEndLiveChat"
       transition="fade-transition"
     ></toolbar-container>    
-
-
-    <img src="https://st3.depositphotos.com/8950810/17657/v/600/depositphotos_176577870-stock-illustration-cute-smiling-funny-robot-chat.jpg" 
-    width=100 height=100 class="img-button" v-on:click="displayChat = true"/>
+  -->    
+  <div class="parche">
+    &nbsp;
+  </div>
+    <img src="@/assets/img/albaGif.gif" 
+    width=128 height=128 class="img-button" v-on:click="displayChat = true"/>
 
     <div class="chat-container" v-if="displayChat">
       <header class='chat-header'>
-          <div>Alex Bot</div>
-          <v-icon class="smicon myicon" v-on:click="displayChat = false">
-            close
-          </v-icon>
+          <div class="header-avatar-title">
+            <img src="@/assets/img/alba_header.jpg" 
+              width=32 height=32/>
+            ALBA
+          </div>
+
+          <div class="header-flex-buttons">
+              <div class="border-icon">
+                <v-icon class="my-icon" v-on:click="onDeleteMessages">
+                  delete
+                </v-icon>
+              </div>
+              <div class="border-icon">
+                <v-icon class="my-icon" v-on:click="displayChat = false">
+                  close
+                </v-icon>
+              </div>
+          </div>
+
       </header>
       
       <message-list v-if="!isUiMinimized"
           ></message-list>
 
+      <hr class="simple-hr-line"/>
       <input-container
         ref="InputContainer"
         v-if="!isUiMinimized && !hasButtons"
@@ -276,6 +298,10 @@ export default {
     window.addEventListener('resize', this.onResize, { passive: true });
   },
   methods: {
+    onDeleteMessages() {
+      alert('mensajes eliminados');
+      this.$store.state.messages = [];
+    },
     onResize() {
       const { innerWidth } = window;
       this.setToolbarHeigthClassSuffix(innerWidth);
@@ -550,22 +576,30 @@ NOTE: not using var() for different heights due to IE11 compatibility
 
 .img-button{
   position: fixed;
-  top:80%;
-  left:89%;
+  top:74%;
+  left:90%;
   cursor:pointer;
 }
 
-.myicon{
+.border-icon {
   cursor:pointer;
+  border:1px solid #ccc;
+  border-radius: 50%;  
+  padding:3px;
+}
+
+.my-icon {
+  font-size:22px !important;
+  color:#ccc !important;
 }
 
 .chat-container {
-    width: 40%;
-    height: 75%;
+    width: 30%;
+    height: 80%;
     position: fixed;
     background-color:  white;    
-    top:20%;
-    left:59%;
+    top:17%;
+    left:69%;
     z-index: 1000;
     display: flex;
     flex-direction: column;
@@ -583,6 +617,33 @@ NOTE: not using var() for different heights due to IE11 compatibility
     padding: 10px;
     display:flex;
     justify-content:space-between;
+    background-color:  #004B8D;
+    color:white;
+}
+
+.header-avatar-title {
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.header-flex-buttons {
+  display:flex;
+  gap:5px;
+}
+
+.simple-hr-line {
+  border-top:1px solid #ccc;
+}
+
+.parche {
+  background-color:#012D74;
+  width:230px;
+  height:230px; 
+  position: fixed;
+  top:63%;
+  left:85%;
+  cursor:pointer;
 }
 
 #lex-web[ui-minimized] {

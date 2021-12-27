@@ -1,30 +1,27 @@
 <template>
-  <v-card class="card-container">
-    
+  <v-card class="card-container">    
     <v-card-text v-if="responseCard.subTitle">
       <span>{{responseCard.subTitle}}</span>
     </v-card-text>
     <v-card-media
-      v-if="responseCard.imageUrl"
+      v-if="responseCard.imageUrl && !isCarousel"
       v-bind:src="responseCard.imageUrl"
       contain
       height="50vh"
     ></v-card-media>
     <v-card-actions v-if="responseCard.buttons" class="button-row">
-      <div class="btns-containers">
-        <v-btn
-        v-for="(button) in responseCard.buttons"
-        v-show="button.text && button.value"
-        v-bind:key="button.id"
-        v-on:click.once.native="onButtonClick(button.value)"
-        v-bind:disabled="shouldDisableClickedResponseCardButtons"
-        round
-        default
-        v-bind:color="button.text.toLowerCase() === 'more' ? '' : 'accent'"
-        class="secondary--text btns"
-      >
-        {{button.text}}
-      </v-btn>
+      <div class="btns-containers">        
+        <button 
+          v-for="(button) in responseCard.buttons"
+          v-show="button.text && button.value"
+          v-bind:key="button.id"
+          v-on:click="onButtonClick(button.value)"
+          v-bind:disabled="shouldDisableClickedResponseCardButtons"
+          round
+          default
+          class="btns">
+          {{button.text}}
+        </button>
       </div>
     </v-card-actions>
     <v-card-actions v-if="responseCard.attachmentLinkUrl">
@@ -35,7 +32,7 @@
         v-bind:href="responseCard.attachmentLinkUrl"
         target="_blank"
       >
-        Open Link
+        Ingresa aquí
       </v-btn>
     </v-card-actions>
   </v-card>
@@ -56,7 +53,7 @@ License for the specific language governing permissions and limitations under th
 */
 export default {
   name: 'response-card',
-  props: ['response-card'],
+  props: ['response-card', 'is-carousel'],
   data() {
     return {
       hasButtonBeenClicked: false,
@@ -120,11 +117,27 @@ export default {
 .btns-containers {
   display:flex;
   flex-direction:column;
+  width:100%;
 }
 
-.btns {
-  background-color:red;
-  color:white;
+.btns {  
+  align-items: center;
+  border: 1px solid #e6e5eb;
+  border-radius: 20px;
+  color: #4a90e2;
+  cursor: pointer;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 8px 10px;
+  margin-bottom: 5px;
 }
 
+.btns:hover {
+  background: #eaeaea;
+  color: #277adc;
+}    
 </style>

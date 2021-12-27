@@ -13,6 +13,13 @@
         <!--
           using v-show instead of v-if to make recorder-status transition work
         -->
+        <v-btn          
+          class="icon-color input-button"
+          icon
+        >
+          <v-icon medium>attachment</v-icon>
+        </v-btn>
+
         <v-text-field
           v-bind:label="textInputPlaceholder"
           v-show="shouldShowTextInput"
