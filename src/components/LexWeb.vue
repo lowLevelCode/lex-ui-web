@@ -298,8 +298,7 @@ export default {
     window.addEventListener('resize', this.onResize, { passive: true });
   },
   methods: {
-    onDeleteMessages() {
-      alert('mensajes eliminados');
+    onDeleteMessages() {      
       this.$store.state.messages = [];
     },
     onResize() {
