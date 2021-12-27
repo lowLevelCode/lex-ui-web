@@ -21,7 +21,7 @@
                   v-if="'text' in message && message.text !== null && message.text.length"
                 ></message-text>
 
-                <div v-if="message.responseCard.genericAttachments.length == 1">
+                <div v-if="message.responseCard && message.responseCard.genericAttachments.length == 1">
                   <response-card
                     v-for="(card, index) in message.responseCard.genericAttachments"
                     :key="index"
@@ -30,7 +30,7 @@
                     >
                   </response-card>
                 </div>
-              </div>      
+              </div>                  
           </div>
     </div>
     
@@ -41,7 +41,7 @@
       mt-2 mr-2 ml-3
     >      
       <div class="carousel-container" v-if="message.responseCard.genericAttachments.length > 1">
-        <v-carousel hide-delimiters :interval="10000" class="carousel-content">
+        <v-carousel hide-delimiters :interval="100000" class="carousel-content">
         <v-carousel-item
         v-for="(card, index) in message.responseCard.genericAttachments"
         :key="index"

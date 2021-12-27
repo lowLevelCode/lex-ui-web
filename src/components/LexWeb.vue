@@ -22,9 +22,16 @@
       transition="fade-transition"
     ></toolbar-container>    
 
-    <div class="chat-container">
+
+    <img src="https://st3.depositphotos.com/8950810/17657/v/600/depositphotos_176577870-stock-illustration-cute-smiling-funny-robot-chat.jpg" 
+    width=100 height=100 class="img-button" v-on:click="displayChat = true"/>
+
+    <div class="chat-container" v-if="displayChat">
       <header class='chat-header'>
-          Alex Bot
+          <div>Alex Bot</div>
+          <v-icon class="smicon myicon" v-on:click="displayChat = false">
+            close
+          </v-icon>
       </header>
       
       <message-list v-if="!isUiMinimized"
@@ -77,6 +84,7 @@ export default {
   name: 'lex-web',
   data() {
     return {
+      displayChat:false,
       userNameValue: '',
       toolbarHeightClassSuffix: 'md',
     };
@@ -540,6 +548,17 @@ NOTE: not using var() for different heights due to IE11 compatibility
   height: calc(100% - 2 * 64px);
 }
 
+.img-button{
+  position: fixed;
+  top:80%;
+  left:89%;
+  cursor:pointer;
+}
+
+.myicon{
+  cursor:pointer;
+}
+
 .chat-container {
     width: 40%;
     height: 75%;
@@ -561,7 +580,9 @@ NOTE: not using var() for different heights due to IE11 compatibility
 
 .chat-header {
     border-bottom: 1px solid #ccc;
-    padding: 5px;
+    padding: 10px;
+    display:flex;
+    justify-content:space-between;
 }
 
 #lex-web[ui-minimized] {
